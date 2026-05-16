@@ -1119,7 +1119,7 @@
             const cats = lang[currentLang].categories;
             categoryGrid.innerHTML = cats.map((cat, i) => `
                 <div class="category-card" data-index="${i}">
-                    <img src="${categoryCovers[i]}" alt="${cat.name}">
+                    <img src="${categoryCovers[i]}" alt="${cat.name}" loading="lazy">
                     <div class="category-overlay">
                         <div class="category-name">${cat.name}</div>
                         <div class="category-count">${cat.count}</div>
@@ -1136,7 +1136,7 @@
                 const numLabel = product.num ? `<span class="product-num">${String(product.num).padStart(3, '0')}.</span>` : '';
                 return `
                     <div class="product-item" data-id="${product.id}">
-                        <img class="product-thumb" src="${product.cover}" alt="${name}">
+                        <img class="product-thumb" src="${product.cover}" alt="${name}" loading="lazy">
                         <div class="product-info">
                             <div class="product-name">${numLabel}${highlightedName}</div>
                             <div class="product-model">${product.model}</div>
@@ -1190,7 +1190,7 @@
             // 根据当前语言获取对应的图片
             const currentImgs = product.imgs[currentLang];
             $('detailImages').innerHTML = currentImgs.map((img, i) => `
-                <img src="${img}" alt="Image ${i + 1}" data-img="${img}">
+                <img src="${img}" alt="Image ${i + 1}" data-img="${img}" loading="lazy">
             `).join('');
 
             $('detailExtra').classList.remove('show');
@@ -1257,7 +1257,7 @@
                 // 更新详情图片为当前语言
                 const currentImgs = currentProduct.imgs[currentLang];
                 $('detailImages').innerHTML = currentImgs.map((img, i) => `
-                    <img src="${img}" alt="Image ${i + 1}" data-img="${img}">
+                    <img src="${img}" alt="Image ${i + 1}" data-img="${img}" loading="lazy">
                 `).join('');
             }
 
