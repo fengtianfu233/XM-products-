@@ -837,9 +837,6 @@
 
         <!-- 产品列表页 -->
         <div id="productPage" class="hidden">
-            <button class="back-btn" id="backBtn">
-                <span id="backText">返回分类</span>
-            </button>
             <div class="page-title">
                 <h1 id="categoryTitle"></h1>
             </div>
@@ -848,15 +845,20 @@
 
         <!-- 搜索结果页 -->
         <div id="searchPage" class="hidden">
-            <button class="back-btn" id="searchBackBtn">
-                <span id="searchBackText">返回首页</span>
-            </button>
             <div class="page-title">
                 <h1 id="searchTitle">搜索结果</h1>
                 <p id="searchCount"></p>
             </div>
             <div class="product-list" id="searchResults"></div>
         </div>
+
+        <!-- 返回按钮（固定定位，不受页面 hidden 影响）-->
+        <button class="back-btn hidden" id="backBtn">
+            <span id="backText">返回分类</span>
+        </button>
+        <button class="back-btn hidden" id="searchBackBtn">
+            <span id="searchBackText">返回首页</span>
+        </button>
     </main>
 
     <!-- ========== 产品详情弹窗 ========== -->
@@ -1192,6 +1194,8 @@
             categoryPage.classList.toggle('hidden', page !== 'category');
             productPage.classList.toggle('hidden', page !== 'product');
             searchPage.classList.toggle('hidden', page !== 'search');
+            $('backBtn').classList.toggle('hidden', page !== 'product');
+            $('searchBackBtn').classList.toggle('hidden', page !== 'search');
             searchInput.value = '';
             clearBtn.classList.remove('visible');
         }
