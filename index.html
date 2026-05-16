@@ -1275,6 +1275,8 @@
                 return;
             }
 
+            // 搜索时清除当前分类，确保 showProductDetail 从全量产品中查找
+            currentCategory = null;
             clearBtn.classList.add('visible');
 
             const results = [];
