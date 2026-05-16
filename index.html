@@ -1191,6 +1191,7 @@
             $('categoryTitle').textContent = title;
             renderProducts(currentCategory.products, productList);
             showPage('product');
+            if (window.innerWidth <= 768) history.pushState({from: 'product'}, '');
         }
 
         // ========== 页面切换 ==========
@@ -1228,6 +1229,7 @@
 
             detailModal.classList.add('active');
             document.body.classList.add('modal-open');
+            if (window.innerWidth <= 768) history.pushState({from: 'detail'}, '');
         }
 
         // ========== 图片放大 ==========
@@ -1235,6 +1237,7 @@
             zoomImg.src = imgSrc;
             resetZoom();
             zoomModal.classList.add('active');
+            if (window.innerWidth <= 768) history.pushState({from: 'zoom'}, '');
         }
 
         function resetZoom() {
@@ -1328,6 +1331,7 @@
 
             renderProducts(results, searchResults, searchQuery);
             showPage('search');
+            if (window.innerWidth <= 768) history.pushState({from: 'search'}, '');
         }
 
         // ========== 事件绑定 ==========
@@ -1541,31 +1545,45 @@
             });
 
 
-            // 键盘ESC关闭 & 手机返回键关闭弹窗
+            // 键盘ESC：优先关闭图片弹窗，再关闭详情弹窗
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
-                    closeAllModals();
+                    if (zoomModal.classList.contains('active')) {
+                        zoomModal.classList.remove('active');
+                        resetZoom();
+                    } else if (detailModal.classList.contains('active')) {
+                        detailModal.classList.remove('active');
+                        document.body.classList.remove('modal-open');
+                    }
                 }
             });
 
-            // 手机返回键处理（不关闭网页，只关闭弹窗）
+            // 移动端返回键：图片弹窗 > 详情弹窗 > 返回分类 > 关闭网页
             window.addEventListener('popstate', (e) => {
-                closeAllModals();
-            });
+                if (window.innerWidth > 768) return; // 仅在移动端拦截
 
-            function closeAllModals() {
-                detailModal.classList.remove('active');
-                zoomModal.classList.remove('active');
-                document.body.classList.remove('modal-open');
-            }
-
-            // 拦截浏览器返回键，只关闭弹窗
-            history.pushState({ page: 'main' }, '', location.href);
-            window.addEventListener('popstate', (e) => {
-                if (e.state && e.state.page === 'main') {
-                    closeAllModals();
-                    history.pushState({ page: 'main' }, '', location.href);
+                // 1. 图片弹窗 → 关闭
+                if (zoomModal.classList.contains('active')) {
+                    zoomModal.classList.remove('active');
+                    resetZoom();
+                    return;
                 }
+                // 2. 详情弹窗 → 关闭
+                if (detailModal.classList.contains('active')) {
+                    detailModal.classList.remove('active');
+                    document.body.classList.remove('modal-open');
+                    return;
+                }
+                // 3. 产品页/搜索结果页 → 返回分类
+                if (!productPage.classList.contains('hidden')) {
+                    showPage('category');
+                    return;
+                }
+                if (!searchPage.classList.contains('hidden')) {
+                    showPage('category');
+                    return;
+                }
+                // 4. 分类页面 → 允许关闭网页（默认行为）
             });
         }
 
