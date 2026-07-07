@@ -241,20 +241,21 @@
 
         .product-list {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
         }
 
         .product-item {
             display: flex;
+            flex-direction: column;
             align-items: center;
             background: var(--white);
             border-radius: 10px;
-            padding: 15px;
+            padding: 10px;
             cursor: pointer;
             transition: var(--transition);
             border: 1px solid #eee;
-            gap: 15px;
+            gap: 8px;
         }
 
         .product-item:hover {
@@ -263,28 +264,29 @@
         }
 
         .product-thumb {
-            width: 100px;
+            width: 100%;
+            max-width: 554px;
             aspect-ratio: 4 / 3;
             object-fit: cover;
             border-radius: 6px;
-            flex-shrink: 0;
         }
 
         .product-name {
-            font-size: 16px;
+            font-size: 14px;
             color: var(--text);
+            text-align: center;
+            line-height: 1.4;
         }
 
         .product-model {
-            font-size: 14px;
+            font-size: 12px;
             color: #4299e1;
-            padding-left: 36px;
+            text-align: center;
             margin-top: 2px;
         }
 
         .product-num {
             display: inline-block;
-            min-width: 32px;
             color: var(--primary);
             font-weight: 600;
             margin-right: 4px;
@@ -653,7 +655,21 @@
             }
 
             .product-list {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .product-item {
+                padding: 8px;
+                gap: 6px;
+            }
+
+            .product-name {
+                font-size: 13px;
+            }
+
+            .product-model {
+                font-size: 11px;
             }
 
             .detail-body {
@@ -760,22 +776,26 @@
                 padding: 12px;
             }
 
+            .product-list {
+                grid-template-columns: 1fr;
+            }
+
             .product-item {
-                padding: 12px;
-                gap: 12px;
+                padding: 10px;
+                gap: 8px;
             }
 
             .product-thumb {
-                width: 80px;
-                aspect-ratio: 4 / 3;
+                width: 100%;
+                max-width: 554px;
             }
 
             .product-name {
-                font-size: 16px;
+                font-size: 14px;
             }
 
             .product-model {
-                padding-left: 32px;
+                font-size: 12px;
             }
 
             .detail-body {
@@ -821,10 +841,6 @@
             <input type="text" class="search-input" id="searchInput" placeholder="搜索产品名称、型号...">
             <button class="clear-btn" id="clearBtn">x</button>
             <button class="search-btn" id="searchBtn">搜索</button>
-        </div>
-        <div class="lang-toggle">
-            <button class="lang-btn active" data-lang="zh">中文</button>
-            <button class="lang-btn" data-lang="en">English</button>
         </div>
     </div>
 
@@ -919,7 +935,7 @@
                     { name: '彩屏类', count: '3 款产品' },
                     { name: '滑条类', count: '6 款产品' },
                     { name: '天气模块类', count: '1 款产品' },
-                    { name: '蓝牙类', count: '5 款产品' },
+                    { name: '蓝牙类', count: '7 款产品' },
                     { name: '时钟类', count: '4 款产品' },
                     { name: '语音控制类', count: '1 款产品' },
                     { name: '配件类', count: '12 款产品' }
@@ -943,7 +959,7 @@
                     { name: 'Color Screen Type', count: '3 Products' },
                     { name: 'Slider Type', count: '6 Products' },
                     { name: 'Weather Module Type', count: '1 Product' },
-                    { name: 'Bluetooth Type', count: '5 Products' },
+                    { name: 'Bluetooth Type', count: '7 Products' },
                     { name: 'Clock Type', count: '4 Products' },
                     { name: 'Voice Control Type', count: '1 Product' },
                     { name: 'Accessories', count: '12 Products' }
@@ -1066,7 +1082,9 @@
                     { id: 'p061', num: 57, name: { zh: '三色大屏蓝牙带通话开关', en: 'Three-color large-screen Bluetooth switch with call function' }, model: 'XM518-BTSP', cover: 'images/057/cover.jpg', imgs: { zh: ['images/057/zh/XM518-BTSP六键双色大屏蓝牙带通话显示系统-规格说明书_01.png', 'images/057/zh/XM518-BTSP六键双色大屏蓝牙带通话显示系统-规格说明书_02.png', 'images/057/zh/XM518-BTSP六键双色大屏蓝牙带通话显示系统-规格说明书_03.png', 'images/057/zh/XM518-BTSP六键双色大屏蓝牙带通话显示系统-规格说明书_04.png', 'images/057/zh/XM518-BTSP六键双色大屏蓝牙带通话显示系统-规格说明书_05.png', 'images/057/zh/XM518-BTSP六键双色大屏蓝牙带通话显示系统-规格说明书_06.png', 'images/057/zh/XM518-BTSP六键双色大屏蓝牙带通话显示系统-规格说明书_07.png', 'images/057/zh/XM518-BTSP六键双色大屏蓝牙带通话显示系统-规格说明书_08.png'], en: ['images/057/en/XM518-BTSP_01.png', 'images/057/en/XM518-BTSP_02.png', 'images/057/en/XM518-BTSP_03.png', 'images/057/en/XM518-BTSP_04.png', 'images/057/en/XM518-BTSP_05.png', 'images/057/en/XM518-BTSP_06.png', 'images/057/en/XM518-BTSP_07.png', 'images/057/en/XM518-BTSP_08.png', 'images/057/en/XM518-BTSP_09.png'] } },
                     { id: 'p062', num: 58, name: { zh: '不带通话蓝牙', en: 'Bluetooth without call function' }, model: 'XM-BT88', cover: 'images/058/cover.jpg', imgs: { zh: ['images/058/zh/XM-BT88不带通话蓝牙开关-规格说明书_01.png', 'images/058/zh/XM-BT88不带通话蓝牙开关-规格说明书_02.png', 'images/058/zh/XM-BT88不带通话蓝牙开关-规格说明书_03.png', 'images/058/zh/XM-BT88不带通话蓝牙开关-规格说明书_04.png', 'images/058/zh/XM-BT88不带通话蓝牙开关-规格说明书_05.png'], en: ['images/058/en/XM-BT88_01.png', 'images/058/en/XM-BT88_02.png', 'images/058/en/XM-BT88_03.png', 'images/058/en/XM-BT88_04.png', 'images/058/en/XM-BT88_05.png'] } },
                     { id: 'p063', num: 59, name: { zh: '带通话蓝牙', en: 'Bluetooth with call function' }, model: 'XM-BT88P', cover: 'images/059/cover.jpg', imgs: { zh: ['images/059/zh/XM-BT88P带通话蓝牙开关-规格说明书_01.png', 'images/059/zh/XM-BT88P带通话蓝牙开关-规格说明书_02.png', 'images/059/zh/XM-BT88P带通话蓝牙开关-规格说明书_03.png', 'images/059/zh/XM-BT88P带通话蓝牙开关-规格说明书_04.png', 'images/059/zh/XM-BT88P带通话蓝牙开关-规格说明书_05.png'], en: ['images/059/en/XM-BT88P_01.png', 'images/059/en/XM-BT88P_02.png', 'images/059/en/XM-BT88P_03.png', 'images/059/en/XM-BT88P_04.png', 'images/059/en/XM-BT88P_05.png'] } },
-                    { id: 'p064', num: 60, name: { zh: '迷你蓝牙（不带通话）', en: 'Mini Bluetooth (without call function)' }, model: 'XM-Mini-BT88', cover: 'images/060/cover.jpg', imgs: { zh: ['images/060/zh/XM-Mini-BT88不带通话蓝牙开关-规格说明书_01.png', 'images/060/zh/XM-Mini-BT88不带通话蓝牙开关-规格说明书_02.png', 'images/060/zh/XM-Mini-BT88不带通话蓝牙开关-规格说明书_03.png', 'images/060/zh/XM-Mini-BT88不带通话蓝牙开关-规格说明书_04.png', 'images/060/zh/XM-Mini-BT88不带通话蓝牙开关-规格说明书_05.png'], en: ['images/060/en/XM-Mini-BT88_01.png', 'images/060/en/XM-Mini-BT88_02.png', 'images/060/en/XM-Mini-BT88_03.png', 'images/060/en/XM-Mini-BT88_04.png', 'images/060/en/XM-Mini-BT88_05.png'] } }
+                    { id: 'p064', num: 60, name: { zh: '迷你蓝牙（不带通话）', en: 'Mini Bluetooth (without call function)' }, model: 'XM-Mini-BT88', cover: 'images/060/cover.jpg', imgs: { zh: ['images/060/zh/XM-Mini-BT88不带通话蓝牙开关-规格说明书_01.png', 'images/060/zh/XM-Mini-BT88不带通话蓝牙开关-规格说明书_02.png', 'images/060/zh/XM-Mini-BT88不带通话蓝牙开关-规格说明书_03.png', 'images/060/zh/XM-Mini-BT88不带通话蓝牙开关-规格说明书_04.png', 'images/060/zh/XM-Mini-BT88不带通话蓝牙开关-规格说明书_05.png'], en: ['images/060/en/XM-Mini-BT88_01.png', 'images/060/en/XM-Mini-BT88_02.png', 'images/060/en/XM-Mini-BT88_03.png', 'images/060/en/XM-Mini-BT88_04.png', 'images/060/en/XM-Mini-BT88_05.png'] } },
+                    { id: 'p083', num: 78, name: { zh: '4键蓝牙模块', en: '4-Key Bluetooth Module' }, model: 'XM319-24G-BT1', cover: 'images/078/cover.jpg', imgs: { zh: ['images/078/zh/XM319-24G-BT1 4键蓝牙模块-规格说明书（简易功能）_01.png', 'images/078/zh/XM319-24G-BT1 4键蓝牙模块-规格说明书（简易功能）_02.png', 'images/078/zh/XM319-24G-BT1 4键蓝牙模块-规格说明书（简易功能）_03.png', 'images/078/zh/XM319-24G-BT1 4键蓝牙模块-规格说明书（简易功能）_04.png', 'images/078/zh/XM319-24G-BT1 4键蓝牙模块-规格说明书（简易功能）_05.png', 'images/078/zh/XM319-24G-BT1 4键蓝牙模块-规格说明书（简易功能）_06.png', 'images/078/zh/XM319-24G-BT1 4键蓝牙模块-规格说明书（简易功能）_07.png', 'images/078/zh/XM319-24G-BT1 4键蓝牙模块-规格说明书（简易功能）_08.png', 'images/078/zh/XM319-24G-BT1 4键蓝牙模块-规格说明书（简易功能）_09.png', 'images/078/zh/XM319-24G-BT1 4键蓝牙模块-规格说明书（简易功能）_10.png'], en: ['images/078/en/XM319-24G-BT1_01.png', 'images/078/en/XM319-24G-BT1_02.png', 'images/078/en/XM319-24G-BT1_03.png', 'images/078/en/XM319-24G-BT1_04.png', 'images/078/en/XM319-24G-BT1_05.png', 'images/078/en/XM319-24G-BT1_06.png', 'images/078/en/XM319-24G-BT1_07.png', 'images/078/en/XM319-24G-BT1_08.png', 'images/078/en/XM319-24G-BT1_09.png', 'images/078/en/XM319-24G-BT1_10.png'] } },
+                    { id: 'p084', num: 79, name: { zh: '4键蓝牙模块', en: '4-Key Bluetooth Module' }, model: 'XM319-24G-BT2', cover: 'images/079/cover.jpg', imgs: { zh: ['images/079/zh/XM319-24G-BT2 4键蓝牙模块-规格说明书（复合功能）_01.png', 'images/079/zh/XM319-24G-BT2 4键蓝牙模块-规格说明书（复合功能）_02.png', 'images/079/zh/XM319-24G-BT2 4键蓝牙模块-规格说明书（复合功能）_03.png', 'images/079/zh/XM319-24G-BT2 4键蓝牙模块-规格说明书（复合功能）_04.png', 'images/079/zh/XM319-24G-BT2 4键蓝牙模块-规格说明书（复合功能）_05.png', 'images/079/zh/XM319-24G-BT2 4键蓝牙模块-规格说明书（复合功能）_06.png', 'images/079/zh/XM319-24G-BT2 4键蓝牙模块-规格说明书（复合功能）_07.png', 'images/079/zh/XM319-24G-BT2 4键蓝牙模块-规格说明书（复合功能）_08.png', 'images/079/zh/XM319-24G-BT2 4键蓝牙模块-规格说明书（复合功能）_09.png'], en: ['images/079/en/XM319-24G-BT2_01.png', 'images/079/en/XM319-24G-BT2_02.png', 'images/079/en/XM319-24G-BT2_03.png', 'images/079/en/XM319-24G-BT2_04.png', 'images/079/en/XM319-24G-BT2_05.png', 'images/079/en/XM319-24G-BT2_06.png', 'images/079/en/XM319-24G-BT2_07.png', 'images/079/en/XM319-24G-BT2_08.png', 'images/079/en/XM319-24G-BT2_09.png'] } }
                 ]
             },
             {
@@ -1274,9 +1292,7 @@
             $('searchTitle').textContent = l.searchResults;
 
             // 更新按钮文字
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.lang === currentLang);
-            });
+            // 语言已固定为英语，无需切换按钮
 
             // 重新渲染
             renderCategories();
@@ -1338,24 +1354,6 @@
 
         // ========== 事件绑定 ==========
         function bindEvents() {
-            // 语言切换
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    currentLang = btn.dataset.lang;
-                    // 清空搜索状态并回到首页
-                    searchInput.value = '';
-                    clearBtn.classList.remove('visible');
-                    searchQuery = '';
-                    currentCategory = null;
-                    currentProduct = null;
-                    detailModal.classList.remove('active');
-                    zoomModal.classList.remove('active');
-                    document.body.classList.remove('modal-open');
-                    showPage('category');
-                    updateLanguage();
-                });
-            });
-
             // 搜索输入 - 监听文字变化显示/隐藏清除按钮
             searchInput.addEventListener('input', (e) => {
                 if (e.target.value.trim()) {
