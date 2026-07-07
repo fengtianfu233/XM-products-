@@ -96,6 +96,8 @@
 |061|不带通话蓝牙|Bluetooth without call function|XM-BT89|
 |062|带通话蓝牙|Bluetooth with call function|XM-BT89P|
 |063|迷你蓝牙（不带通话）|Mini Bluetooth (without call function)|XM-BT89|
+|064|4键蓝牙模块|4-Key Bluetooth Module|XM319-24G-BT1|
+|065|4键蓝牙模块|4-Key Bluetooth Module|XM319-24G-BT2|
 ## 时钟类
 |num|detailTitle（zh）|detailTitle（en）|detailModel|
 |:----|:----|:----|:----|
