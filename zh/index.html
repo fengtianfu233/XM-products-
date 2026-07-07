@@ -1176,6 +1176,13 @@
             `).join('');
         }
 
+        // ========== 根据语言获取封面图 ==========
+        function getCover(product) {
+            return currentLang === 'en'
+                ? product.cover.replace('cover.jpg', 'en-cover.jpg')
+                : product.cover;
+        }
+
         // ========== 渲染产品列表 ==========
         function renderProducts(list, container, keyword = '') {
             container.innerHTML = list.map(product => {
@@ -1184,7 +1191,7 @@
                 const numLabel = product.num ? `<span class="product-num">${String(product.num).padStart(3, '0')}.</span>` : '';
                 return `
                     <div class="product-item" data-id="${product.id}">
-                        <img class="product-thumb" src="${product.cover}" alt="${name}" loading="lazy">
+                        <img class="product-thumb" src="${getCover(product)}" alt="${name}" loading="lazy">
                         <div class="product-info">
                             <div class="product-name">${numLabel}${highlightedName}</div>
                             <div class="product-model">${product.model}</div>
@@ -1234,7 +1241,7 @@
 
             currentProduct = product;
 
-            $('detailMainImg').src = product.cover;
+            $('detailMainImg').src = getCover(product);
             $('detailTitle').textContent = product.name[currentLang];
             $('detailModel').textContent = product.model;
 
