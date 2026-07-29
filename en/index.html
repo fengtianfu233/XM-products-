@@ -548,6 +548,44 @@
             background: rgba(0,0,0,0.9);
         }
 
+        .zoom-nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border: none;
+            background: rgba(255,255,255,0.12);
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 28px;
+            z-index: 3100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            line-height: 1;
+        }
+        .zoom-nav:hover { background: rgba(255,255,255,0.3); }
+        .zoom-prev { left: 12px; }
+        .zoom-next { right: 12px; }
+        .zoom-nav.hidden { display: none; }
+
+        .zoom-counter {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 13px;
+            z-index: 3100;
+            background: rgba(0,0,0,0.5);
+            padding: 4px 14px;
+            border-radius: 12px;
+        }
+        .zoom-counter.hidden { display: none; }
+
         /* ========== 隐藏状态 ========== */
         .hidden {
             display: none !important;
@@ -904,6 +942,9 @@
     <!-- ========== 图片放大弹窗 ========== -->
     <div class="zoom-modal" id="zoomModal">
         <button class="zoom-close" id="zoomClose">x</button>
+        <button class="zoom-nav zoom-prev hidden" id="zoomPrev">&#8249;</button>
+        <button class="zoom-nav zoom-next hidden" id="zoomNext">&#8250;</button>
+        <span class="zoom-counter hidden" id="zoomCounter"></span>
         <div class="zoom-container" id="zoomContainer">
             <img class="zoom-img" id="zoomImg" src="" alt="">
         </div>
@@ -1169,6 +1210,8 @@
         let translateX = 0;
         let translateY = 0;
         let lastTouchDistance = 0;
+        let zoomImages = [];
+        let zoomIndex = 0;
 
         // ========== 初始化 ==========
         function init() {
@@ -1276,11 +1319,34 @@
         }
 
         // ========== 图片放大 ==========
-        function showZoom(imgSrc) {
-            zoomImg.src = imgSrc;
+        function showZoom(imgSrcOrArray, index) {
+            if (Array.isArray(imgSrcOrArray)) {
+                zoomImages = imgSrcOrArray;
+                zoomIndex = index || 0;
+                zoomImg.src = zoomImages[zoomIndex];
+                $('zoomPrev').classList.toggle('hidden', zoomImages.length <= 1);
+                $('zoomNext').classList.toggle('hidden', zoomImages.length <= 1);
+                $('zoomCounter').textContent = zoomImages.length > 1 ? `${zoomIndex + 1} / ${zoomImages.length}` : '';
+                $('zoomCounter').classList.toggle('hidden', zoomImages.length <= 1);
+            } else {
+                zoomImages = [];
+                zoomIndex = 0;
+                zoomImg.src = imgSrcOrArray;
+                $('zoomPrev').classList.add('hidden');
+                $('zoomNext').classList.add('hidden');
+                $('zoomCounter').classList.add('hidden');
+            }
             resetZoom();
             zoomModal.classList.add('active');
             if (window.innerWidth <= 768) history.pushState({from: 'zoom'}, '');
+        }
+
+        function navigateZoom(dir) {
+            if (zoomImages.length === 0) return;
+            zoomIndex = (zoomIndex + dir + zoomImages.length) % zoomImages.length;
+            zoomImg.src = zoomImages[zoomIndex];
+            $('zoomCounter').textContent = `${zoomIndex + 1} / ${zoomImages.length}`;
+            resetZoom();
         }
 
         function resetZoom() {
@@ -1473,7 +1539,9 @@
 
             $('detailImages').addEventListener('click', (e) => {
                 if (e.target.tagName === 'IMG') {
-                    showZoom(e.target.dataset.img);
+                    const allImgs = Array.from($('detailImages').querySelectorAll('img'));
+                    const idx = allImgs.indexOf(e.target);
+                    showZoom(allImgs.map(i => i.dataset.img), idx);
                 }
             });
 
@@ -1494,6 +1562,17 @@
             $('zoomIn').addEventListener('click', () => zoom(0.5));
             $('zoomOut').addEventListener('click', () => zoom(-0.5));
             $('zoomReset').addEventListener('click', resetZoom);
+
+            // 图片左右切换
+            $('zoomPrev').addEventListener('click', () => navigateZoom(-1));
+            $('zoomNext').addEventListener('click', () => navigateZoom(1));
+
+            // 键盘左右箭头切换
+            document.addEventListener('keydown', (e) => {
+                if (!zoomModal.classList.contains('active')) return;
+                if (e.key === 'ArrowLeft') navigateZoom(-1);
+                if (e.key === 'ArrowRight') navigateZoom(1);
+            });
 
             // 滚轮缩放
             zoomModal.addEventListener('wheel', (e) => {
